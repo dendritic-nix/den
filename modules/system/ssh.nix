@@ -1,11 +1,19 @@
 {
   den.aspects.system._.ssh = {
-    nixos = {};
+    nixos = { };
     homeManager = {
       programs.ssh = {
         enableDefaultConfig = false;
         matchBlocks = {
-          "*" = {};
+          "*" = {
+            serverAliveInterval = 30;
+            serverAliveCountMax = 120;
+            strictHostKeyChecking = "accept-new";
+            identitiesOnly = true;
+            extraOptions = {
+              Protocol = "2";
+            };
+          };
           ghcny = {
             hostname = "github.com";
             user = "git";
