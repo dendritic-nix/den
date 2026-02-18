@@ -29,6 +29,7 @@
       <system/fonts>
       <system/networking>
       <system/nvidia>
+      <system/xdg>
 
       # <desktop/sddm>
       # <desktop/kde>
