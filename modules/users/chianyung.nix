@@ -13,13 +13,14 @@
       <shell/bash>
       <shell/fish>
       <shell/git/chianyungcode>
-      # <shell/kanata>
       <shell/lazygit>
       <shell/neovim>
       <shell/starship>
-      <shell/tailscale>
       <shell/tmux>
       <shell/yazi>
+
+      <services/tailscale>
+      <services/kanata>
     ];
 
     nixos = {

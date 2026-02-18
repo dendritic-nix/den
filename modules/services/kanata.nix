@@ -1,5 +1,5 @@
 {
-  den.aspects.shell._.kanata = {
+  den.aspects.services._.kanata = {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [kanata-with-cmd];
       systemd.services.kanata = {
