@@ -52,6 +52,7 @@
     };
 
     homeManager = {
+      imports = [inputs.nix-index-database.homeModules.nix-index];
       systemd.user.startServices = "sd-switch";
     };
   };
