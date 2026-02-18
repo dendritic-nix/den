@@ -27,24 +27,25 @@ in {
                   mountOptions = ["umask=0077"];
                 };
               };
-
-              swap = {
-                priority = 2;
-                size = "16G";
-                content = {
-                  type = "swap";
-                  resumeDevice = true;
-                };
-              };
-
               root = {
-                priority = 3;
                 size = "100%";
                 content = {
-                  type = "filesystem";
-                  format = "ext4";
-                  mountpoint = "/";
-                  mountOptions = ["noatime"];
+                  type = "btrfs";
+                  extraArgs = ["-f"];
+                  subvolumes = {
+                    "@" = {
+                      mountpoint = "/";
+                      inherit mountOptions;
+                    };
+                    "@home" = {
+                      mountpoint = "/home";
+                      inherit mountOptions;
+                    };
+                    "@nix" = {
+                      mountpoint = "/nix";
+                      inherit mountOptions;
+                    };
+                  };
                 };
               };
             };
