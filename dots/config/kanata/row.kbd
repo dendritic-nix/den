@@ -1,0 +1,276 @@
+;; https://jtroo.github.io/config.html
+
+;; Global configuration, this configuration applied globally
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes ;; for input chording/combos
+  danger-enable-cmd yes
+
+;; uncomment this code below if you using kanata in macos, to prevent bugs that causing kanata doesn't work after sleep
+
+;;  macos-dev-names-exclude (
+;;    "Corne"
+;;    "kbdksp/geulisv1"
+;;  )
+
+;;  macos-dev-names-include (
+;;      "Chian's Magic Keyboard"
+;;  )
+
+)
+
+;; Variable for storing a constant value
+(defvar
+  tap-time 200
+  hold-time 200
+  hold-time-slow 300
+  input-chord-time 250
+)
+
+;; Define key that want to remap
+(defsrc
+       f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;;  Syntax for tap-hold
+;;  (tap-hold TAP-TIME HOLD-TIME TAP-KEY HOLD-KEY)
+(defalias
+  cw (caps-word 1000)
+
+  ;; ==== LAYERS ====
+  ;; You may also use `layer-toggle` in place of `layer-while-held`; they behave exactly the same. The `layer-toggle` name is slightly shorter but is a bit inaccurate with regards to its meaning.
+  lwh_nums (layer-while-held nums)
+  lwh_symbols (layer-while-held symbols)
+  lwh_tmux (layer-while-held tmux)
+  lwh_nav  (layer-while-held nav)
+  lwh_sublayers (layer-while-held sublayers)
+
+  spc_ly3 (tap-hold $tap-time $hold-time spc @lwh_symbols)
+  thl-cap-nav (tap-hold $tap-time $hold-time esc @lwh_nav)
+  thl-ret-sublayers (tap-hold $tap-time $hold-time ret @lwh_sublayers)
+  thl-sls-tmux (tap-hold $tap-time $hold-time / @lwh_tmux)
+  thl-z-tmux (tap-hold $tap-time $hold-time z @lwh_tmux)
+
+  thl-v-zlj (tap-hold $tap-time $hold-time v (layer-while-held zellij))
+  thl-m-zlj (tap-hold $tap-time $hold-time m (layer-while-held zellij))
+
+  lmet_tab (tap-hold $tap-time $hold-time tab (macro A-tab))
+
+  ;; ==== MODIFIER KEYS + LETTER KEYS ====
+  a (tap-hold $tap-time $hold-time a lsft)
+  ; (tap-hold $tap-time $hold-time ; lsft)
+
+  s (tap-hold $tap-time $hold-time s lctl)
+  d (tap-hold $tap-time $hold-time d lalt)
+  f (tap-hold $tap-time $hold-time f lmet)
+  l (tap-hold $tap-time $hold-time l lctl)
+  k (tap-hold $tap-time $hold-time k lalt)
+  j (tap-hold $tap-time $hold-time j lmet)
+  m (tap-hold $tap-time $hold-time m lmet)
+  v (tap-hold $tap-time $hold-time v lmet)
+  hyperkey (tap-hold $tap-time $hold-time spc (multi lsft lctl lalt lmet))
+
+  ;; ==== OS SPECIFIC ====
+  ;; - macOS -
+  mc C-up ;; Mission Control
+  sls M-spc ;; Spotlight Search
+  dtn S-C-A-M-f5 ;; Dictation
+  dnd S-C-A-M-f6 ;; Do Not Disturb
+  lp S-C-A-M-l ;; Launchpad
+
+  sprwhpr C-A-/ ;; Superwhisper
+  hmrwapp M-S-spc
+
+  tab-left C-S-tab
+  tab-right C-tab
+)
+
+;; == Input combos / chording ==
+#|
+  syntax:
+  (participating-keysN) actionN timeoutN release-behaviourN (disabled-layersN)
+
+  references:
+  https://jtroo.github.io/config.html#input-chords-v2
+
+  timeoutN :
+  The maximum time (in milliseconds) between the first key press and the subsequent ones for them to be recognized as a "chord".
+  If the keys are not pressed within this time window, the system treats them as regular key presses (not a chord) and processes them according to the active layer.
+|#
+
+(defchordsv2
+  (m ,) C-a $input-chord-time all-released ()
+  (i o) C-left 20 all-released ()
+  (o p) C-right 20 all-released ()
+  (lalt lsft [) C-S-tab 250 first-release ()
+  (lalt lsft ]) C-tab 250 first-release ()
+)
+
+;; == Layers ==
+;; the order of deflayer is important, the first layer defined is the layer that will be active by default when kanata is running
+
+;; Define base / default layer
+(deflayer base
+       🔅    🔆    @mc   @sls  @dtn  @dnd  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  @lmet_tab    q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @thl-cap-nav  @a    @s    @d    @f    g    h    @j    @k    @l    @;    '    @thl-ret-sublayers
+  lsft @thl-z-tmux    x    c    @thl-v-zlj    b    n    @thl-m-zlj    ,    .   @thl-sls-tmux    rsft ;; Tombol x sekarang punya fungsi ganda
+  lctl lmet lalt           @spc_ly3            ralt rmet rctl
+)
+
+(deflayer nav
+       🔅    🔆    @mc   @sls  @dtn  @dnd  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  f1   f2   f3   f4   f5    f6    f7    f8    f9    f10    @tab-left   @tab-right    \
+  caps a    @sprwhpr    @hmrwapp    f    g    left    down    up    right    ;    '    ret
+  lsft z    x    c    v    b    j    rctl    @hmrwapp    .    rmet    rsft
+  lctl lmet lalt           @hyperkey            ralt rmet rctl
+)
+
+(deflayer nums
+       🔅    🔆    @mc   @sls  @dtn  @dnd  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  grv  XX    XX    XX    XX    XX    XX    XX    XX    XX    XX    -    =    bspc
+  tab  f1   f2   f3   f4   f5    f6    f7    f8    f9    f10    @tab-left   @tab-right    \
+  caps 1    2    3    4    5    6    7    8    9    ;    '    ret
+  lsft XX  XX  XX  XX  XX    XX    0    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer symbols
+       🔅    🔆    @mc   @sls  @dtn  @dnd  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  XX   -   =   XX   XX   XX   XX   -   =   XX  XX   XX    \
+  caps S-1  S-2  S-3  S-4  S-5    S-6    S-7    S-8    S-9    S-0    '    ret
+  lsft 1    2    3    4    5    6    7    8    9    0    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defalias
+  ly-rayc r
+)
+
+(deflayer sublayers
+       🔅    🔆    @mc   @sls  @dtn  @dnd  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  grv  o   XX   XX    XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  tab  XX   XX   XX   @ly-rayc   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  caps XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  lsft XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;; == TMUX ==
+(defalias
+  tmux-prefix C-a
+
+  tx-new-window (macro @tmux-prefix c) ;; new window
+  tx-plg-sesh  (macro @tmux-prefix o) ;; sesh plugin
+  tx-detach (macro @tmux-prefix d) ;; detach tmux
+  tx-vi-mode (macro @tmux-prefix [) ;; switch to tmux vi mode
+
+  ;; rename session/window/pane
+  tx-rn-session (macro @tmux-prefix S-4) ;; rename session
+  tx-rn-window (macro @tmux-prefix ,) ;; rename window
+  tx-rn-pane (macro @tmux-prefix u) ;; rename pane
+
+  ;; switch between last session/window/pane
+  tx-sw-session (macro @tmux-prefix S-a)
+  tx-sw-window (macro @tmux-prefix a)
+  tx-sw-pane (macro @tmux-prefix q)
+
+  ;; split pane
+  tx-splith (macro @tmux-prefix -)
+  tx-splitv (macro @tmux-prefix S-\)
+
+  ;; select session/window
+  tx-slcsession (macro @tmux-prefix s)
+  tx-slcwindow (macro @tmux-prefix w)
+
+  ;; kill session/window/pane
+  tx-kill-session (macro @tmux-prefix g)
+  tx-kill-window (macro @tmux-prefix S-7)
+  tx-kill-pane (macro @tmux-prefix x)
+
+  ;; switch window to {number}
+  tx-wdw-1 (macro @tmux-prefix Digit1)
+  tx-wdw-2 (macro @tmux-prefix Digit2)
+  tx-wdw-3 (macro @tmux-prefix Digit3)
+  tx-wdw-4 (macro @tmux-prefix Digit4)
+  tx-wdw-5 (macro @tmux-prefix Digit5)
+  tx-wdw-6 (macro @tmux-prefix Digit6)
+  tx-wdw-7 (macro @tmux-prefix Digit7)
+  tx-wdw-8 (macro @tmux-prefix Digit8)
+
+  ;; pane navigation
+  tx-p-left (macro @tmux-prefix h)
+  tx-p-bottom (macro @tmux-prefix j)
+  tx-p-top (macro @tmux-prefix k)
+  tx-p-right (macro @tmux-prefix l)
+
+  ;; resize pane
+  tx-rsz-right (macro @tmux-prefix right)
+  tx-rsz-left (macro @tmux-prefix left)
+  tx-rsz-up (macro @tmux-prefix up)
+  tx-rsz-bottom (macro @tmux-prefix down)
+
+  ;; plugins
+  tx-flash (macro @tmux-prefix S-f)
+)
+
+(deflayer tmux
+       🔅        🔆        @mc              @sls           @dtn           @dnd           ◀◀        ▶⏸          ▶▶                    🔇            🔉            🔊
+  grv  @tx-wdw-1          @tx-wdw-2         @tx-wdw-3      @tx-wdw-4      @tx-wdw-5      @tx-wdw-6             @tx-wdw-7           @tx-wdw-8                     9             0             @tx-splith         @tx-splitv         bspc
+  lrld @tx-slcsession     @tx-slcwindow     @tx-detach     XX             f5             @tx-rsz-left          @tx-rsz-bottom        @tx-rsz-up    @tx-rsz-right @tx-plg-sesh       XX                 XX                \
+  @cw  @tx-sw-session     @tx-sw-window     @tx-sw-pane    @tx-flash              5              @tx-p-left            @tx-p-bottom          @tx-p-top     @tx-p-right   ;                  '                  ret
+  lsft @tx-kill-window    @tx-kill-pane     @tx-new-window @tx-vi-mode    XX             @tx-kill-session      @tx-rn-session        @tx-rn-window @tx-rn-pane  /             rsft
+  lctl lmet               lalt                             spc                                            ralt            rmet              rctl
+)
+
+(defalias
+  zlj-prefix C-a
+  zlj-rsz (macro @zlj-prefix 25 r)
+
+  ;; session
+  zlj-ses (macro @zlj-prefix 25 o)
+  zlj-sessions (macro @zlj-prefix 25 o 25 w) ;; session list
+  zlj-ses-dtch (macro @zlj-prefix 25 o 25 d) ;; session detach
+
+  ;; tab
+  zlj-tab (macro @zlj-prefix 25 t)
+  zlj-new-tab (macro @zlj-prefix 25 t 25 n)
+  zlj-tab-qs (macro @zlj-prefix 25 t 10 tab 10 esc) ;; switch last
+  zlj-tab-cls (macro @zlj-prefix 25 t 25 x)
+
+  zlj-t-1 (macro @zlj-prefix 25 t 25 Digit1)
+  zlj-t-2 (macro @zlj-prefix 25 t 25 Digit2)
+  zlj-t-3 (macro @zlj-prefix 25 t 25 Digit3)
+  zlj-t-4 (macro @zlj-prefix 25 t 25 Digit4)
+  zlj-t-5 (macro @zlj-prefix 25 t 25 Digit5)
+  zlj-t-6 (macro @zlj-prefix 25 t 25 Digit6)
+  zlj-t-7 (macro @zlj-prefix 25 t 25 Digit7)
+  zlj-t-8 (macro @zlj-prefix 25 t 25 Digit8)
+  zlj-t-9 (macro @zlj-prefix 25 t 25 Digit9)
+
+  ;; pane
+  zlj-pane (macro @zlj-prefix p)
+  zlj-pane-cls (macro @zlj-prefix 25 p 25 x) ;; close pane
+  zlj-pane-qs (macro @zlj-prefix 25 p 25 tab 25 esc) ;; switch last
+  zlj-splith (macro @zlj-prefix 25 p 25 -) ;; split horizontal
+  zlj-splitv (macro @zlj-prefix 25 p 25 S-\) ;; split vertical
+)
+
+(deflayer zellij
+       🔅    🔆    @mc   @sls  @dtn  @dnd  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  grv  @zlj-t-1  @zlj-t-2  @zlj-t-3  @zlj-t-4  @zlj-t-5  @zlj-t-6  @zlj-t-7  @zlj-t-8  @zlj-t-9   XX   @zlj-splith   @zlj-splitv   XX
+  tab  @zlj-sessions  XX   @zlj-ses-dtch   @zlj-rsz  @zlj-tab  XX        XX   XX   @zlj-ses @zlj-pane     XX   XX XX
+  caps XX   @zlj-tab-qs   @zlj-pane-qs   XX   XX        XX        XX        XX   XX   XX       XX            XX
+  lsft @zlj-tab-cls   @zlj-pane-cls   @zlj-new-tab   XX   XX        XX        XX        XX   XX   XX       XX
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+
