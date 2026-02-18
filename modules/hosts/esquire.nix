@@ -11,25 +11,25 @@
       ];
 
       disko.devices.disk.btrfs.device = lib.mkForce "/dev/disk/by-id/nvme-eui.002538ba11b6cb55";
-
-      includes = [
-        <disko/btrfs>
-
-        <system/systemd-boot>
-        <system/locale>
-        <system/ssh>
-        <system/sshd>
-        <system/audio>
-        <system/fonts>
-        <system/networking>
-        <system/nvidia>
-
-        <desktop/sddm>
-        <desktop/kde>
-
-        <apps/ghostty>
-        <apps/zen>
-      ];
     };
+
+    includes = [
+      <disko/btrfs>
+
+      <system/systemd-boot>
+      <system/locale>
+      <system/ssh>
+      <system/sshd>
+      <system/audio>
+      <system/fonts>
+      <system/networking>
+      <system/nvidia>
+
+      <desktop/sddm>
+      <desktop/kde>
+
+      <apps/ghostty>
+      <apps/zen>
+    ];
   };
 }
