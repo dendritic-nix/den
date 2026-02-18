@@ -20,7 +20,7 @@
         enableNushellIntegration = true;
         flavors = {
           catppuccin-mocha = "${flavors}/flavors/catppuccin-mocha.yazi";
-          catppuccin-macchiato = "${flavors}/catppuccin-macchiato.yazi";
+          catppuccin-macchiato = "${flavors}/flavors/catppuccin-macchiato.yazi";
         };
         theme = {
           flavor = {

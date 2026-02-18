@@ -3,8 +3,7 @@
   __findFile,
   inputs,
   ...
-}:
-{
+}: {
   den.default = {
     nixos.system.stateVersion = "25.11";
     homeManager.home.stateVersion = "25.11";
@@ -29,7 +28,7 @@
       nix = {
         settings = {
           warn-dirty = false;
-          extra-system-features = [ "recursive-nix" ];
+          extra-system-features = ["recursive-nix"];
           experimental-features = [
             "nix-command"
             "flakes"
@@ -55,7 +54,6 @@
     homeManager = {
       systemd.user.startServices = "sd-switch";
     };
-
   };
 
   den.default.includes = [
@@ -67,10 +65,13 @@
 
     # Autoset hostname
     (den.lib.take.exactly (
-      { OS, host }:
-      den.lib.take.unused OS {
-        nixos.networking.hostName = host.hostName;
-      }
+      {
+        OS,
+        host,
+      }:
+        den.lib.take.unused OS {
+          nixos.networking.hostName = host.hostName;
+        }
     ))
   ];
 }
