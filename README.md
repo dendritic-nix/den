@@ -97,6 +97,23 @@ reboot
 
 If your installed system cannot boot at all, boot from the installer USB and run the install command again with this updated repo.
 
+### Intel Gen12 + NVIDIA RTX 3060 note
+
+For this hardware combo, this repo now enables `<system/nvidia>` on `esquire` and uses:
+
+- `services.xserver.videoDrivers = [ "nvidia" ]`
+- `boot.kernelParams = [ "nvidia_drm.modeset=1" ]`
+- `boot.blacklistedKernelModules = [ "nouveau" ]`
+- `hardware.nvidia.open = false`
+
+If you are on a laptop (Optimus), you may still need PRIME bus IDs. Get them with:
+
+```console
+lspci | grep -E "VGA|3D"
+```
+
+Then set `hardware.nvidia.prime.intelBusId` and `hardware.nvidia.prime.nvidiaBusId` in your host config.
+
 ## Important disk note
 
 The `esquire` host currently forces the disk device to this by-id path in `modules/hosts/esquire.nix`:

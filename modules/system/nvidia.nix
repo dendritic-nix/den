@@ -6,14 +6,19 @@
       ];
 
     services.xserver.videoDrivers = ["nvidia"];
+    boot.kernelParams = [
+      "nvidia_drm.modeset=1"
+    ];
+    boot.blacklistedKernelModules = ["nouveau"];
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
     hardware = {
       nvidia = {
-        open = true;
+        # RTX 30 series generally behaves more reliably with the proprietary module.
+        open = false;
         nvidiaSettings = true;
         modesetting.enable = true;
-        powerManagement.enable = true;
+        powerManagement.enable = false;
         powerManagement.finegrained = false;
       };
     };
