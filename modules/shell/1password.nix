@@ -14,6 +14,7 @@
       lib,
       ...
     }: {
+      xdg.configFile."1Password/ssh/agent.toml".source = ../../dots/config/1Password/ssh/agent.toml;
       programs.ssh = {
         enable = true;
         extraConfig =

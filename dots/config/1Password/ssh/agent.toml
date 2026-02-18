@@ -1,0 +1,14 @@
+[[ssh-keys]]
+vault = "Personal"
+
+[[ssh-keys]]
+vault = "Programming"
+
+[[ssh-keys]]
+vault = "UI / UX"
+
+[[ssh-keys]]
+vault = "Productive"
+
+[[ssh-keys]]
+vault = "Business"
