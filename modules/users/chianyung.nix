@@ -7,7 +7,6 @@
       <shell/utils>
       <shell/packages>
       <shell/nh>
-      <shell/env>
 
       <shell/_1password>
       <shell/bash>
