@@ -23,7 +23,7 @@
       <system/audio>
       <system/fonts>
       <system/networking>
-      <system/nvidia>
+      # <system/nvidia>
 
       <desktop/sddm>
       <desktop/kde>
