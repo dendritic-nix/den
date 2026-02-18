@@ -13,7 +13,8 @@
       enable = true;
       extraPackages = [pkgs.sddm-astronaut];
       theme = "catppuccin-${flavor}-${accent}";
-      wayland.enable = true;
+      # X11 greeter is more reliable across mixed GPU setups during initial bootstrap.
+      wayland.enable = false;
     };
   };
 }

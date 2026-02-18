@@ -74,6 +74,29 @@ sudo mount -o remount,size=20G,noatime /nix/.rw-store
 sudo nixos-install --flake .#esquire
 ```
 
+## If boot hangs on a blank screen after the bootloader
+
+This usually means one of these:
+
+- Missing initrd storage module for your disk (for example NVMe)
+- Display manager/GPU driver mismatch on first boot
+
+One-time recovery boot:
+
+1. In the systemd-boot menu, highlight your entry and press `e`.
+2. Append `systemd.unit=multi-user.target` to the kernel command line.
+3. Boot that entry.
+
+Then apply the latest repo config and rebuild (it now includes safer initrd modules and SDDM X11 mode):
+
+```console
+git pull
+sudo nixos-rebuild switch --flake .#esquire
+reboot
+```
+
+If your installed system cannot boot at all, boot from the installer USB and run the install command again with this updated repo.
+
 ## Important disk note
 
 The `esquire` host currently forces the disk device to this by-id path in `modules/hosts/esquire.nix`:
