@@ -30,8 +30,9 @@
       <system/networking>
       <system/nvidia>
 
-      <desktop/sddm>
-      <desktop/kde>
+      # <desktop/sddm>
+      # <desktop/kde>
+      <desktop/gnome>
 
       <apps/ghostty>
       # <apps/zen>
