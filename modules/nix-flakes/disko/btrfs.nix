@@ -1,11 +1,8 @@
-let
-  device = "/dev/sda";
+{lib, ...}: let
+  device = lib.mkDefault "/dev/disk/by-id/nvme-eui.002538ba11b6cb55";
   mountOptions = [
     "noatime"
     "compress=zstd"
-    "ssd"
-    "discard=async"
-    "space_cache=v2"
   ];
 in {
   den.aspects.disko._.btrfs.nixos.disko = {
