@@ -7,28 +7,23 @@
 
   den.aspects.chianyung = {
     includes = [
-      <shell/distrobox>
-      # <shell/git>
-      <shell/nh>
       <shell/nix-tools>
       <shell/utils>
       <shell/packages>
-      <shell/aliases>
-      <shell/fish>
-      <shell/nushell>
-      <shell/yazi>
+      <shell/nh>
       <shell/env>
 
       <shell/_1password>
       <shell/bash>
       <shell/fish>
-      <shell/git>
+      <shell/git/chianyungcode>
       # <shell/kanata>
       <shell/lazygit>
       <shell/neovim>
       <shell/starship>
       <shell/tailscale>
       <shell/tmux>
+      <shell/yazi>
     ];
 
     nixos =

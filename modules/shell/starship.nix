@@ -2,6 +2,7 @@
   den.aspects.shell._.starship.homeManager = {
     programs.starship = {
       enable = true;
+      enableFishIntegration = true;
       settings = {
         "$schema" = "https://starship.rs/config-schema.json";
         add_newline = true;
