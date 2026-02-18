@@ -64,6 +64,16 @@ The `just disko-install` recipe is defined in `justfile` and runs `disko-install
    reboot
    ```
 
+## If you get `No space left on device` during install
+
+You can run the install manually and remount the temporary nix store with a larger size:
+
+```console
+sudo nix run github:nix-community/disko/latest -- --mode destroy,format,mount --flake .#esquire --disk btrfs /dev/disk/by-id/nvme-eui.002538ba11b6cb55
+sudo mount -o remount,size=20G,noatime /nix/.rw-store
+sudo nixos-install --flake .#esquire
+```
+
 ## Important disk note
 
 The `esquire` host currently forces the disk device to this by-id path in `modules/hosts/esquire.nix`:
