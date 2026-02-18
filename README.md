@@ -69,7 +69,7 @@ The `just disko-install` recipe is defined in `justfile` and runs `disko-install
 You can run the install manually and remount the temporary nix store with a larger size:
 
 ```console
-sudo nix --extra-experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount --flake .#esquire --disk btrfs /dev/disk/by-id/nvme-eui.002538ba11b6cb55
+sudo nix --extra-experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount --flake .#esquire
 sudo mount -o remount,size=20G,noatime /nix/.rw-store
 sudo nixos-install --flake .#esquire
 ```
