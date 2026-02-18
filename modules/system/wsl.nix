@@ -7,7 +7,7 @@
 
         wsl = {
           enable = true;
-          defaultUser = "talarys";
+          defaultUser = "chianyung";
           docker-desktop.enable = true;
         };
       };
