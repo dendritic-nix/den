@@ -9,7 +9,7 @@ Run this from a NixOS installer/live environment:
 ```console
 git clone <your-repo-url> den
 cd den
-nix shell nixpkgs#just -c just disko-install esquire btrfs /dev/nvme1n1
+nix --extra-experimental-features "nix-command flakes" shell nixpkgs#just -c just disko-install esquire btrfs /dev/disk/by-id/nvme-eui.002538ba11b6cb55
 reboot
 ```
 
@@ -49,7 +49,7 @@ The `just disko-install` recipe is defined in `justfile` and runs `disko-install
 4. Run the installer command:
 
    ```console
-   nix shell nixpkgs#just -c just disko-install esquire btrfs /dev/nvme1n1
+   nix --extra-experimental-features "nix-command flakes" shell nixpkgs#just -c just disko-install esquire btrfs /dev/disk/by-id/nvme-eui.002538ba11b6cb55
    ```
 
    If `just` is already available, you can run:
