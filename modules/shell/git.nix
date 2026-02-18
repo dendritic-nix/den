@@ -9,9 +9,12 @@
         }: {
           programs.git = {
             enable = true;
-            userName = "chianyungcode";
-            userEmail = "cnytechcode@gmail.com";
-            extraConfig = {
+            settings = {
+              user = {
+                name = "chianyungcode";
+                email = "cnytechcode@gmail.com";
+                signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWQKPz2Bz5ufdBQih3CFMXhpg21Rwzgy/RaT+Q0XNwS";
+              };
               core.pager = "delta";
               gpg = {
                 format = "ssh";
@@ -21,10 +24,6 @@
               };
               commit = {
                 gpgsign = true;
-              };
-
-              user = {
-                signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWQKPz2Bz5ufdBQih3CFMXhpg21Rwzgy/RaT+Q0XNwS";
               };
             };
           };
@@ -38,9 +37,12 @@
         }: {
           programs.git = {
             enable = true;
-            userName = "seraphynee";
-            userEmail = "seraphyne31@gmail.com";
-            extraConfig = {
+            settings = {
+              user = {
+                name = "seraphynee";
+                email = "seraphyne31@gmail.com";
+                signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWQKPz2Bz5ufdBQih3CFMXhpg21Rwzgy/RaT+Q0XNwS";
+              };
               core.pager = "delta";
               gpg = {
                 format = "ssh";
@@ -50,10 +52,6 @@
               };
               commit = {
                 gpgsign = true;
-              };
-
-              user = {
-                signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWQKPz2Bz5ufdBQih3CFMXhpg21Rwzgy/RaT+Q0XNwS";
               };
             };
           };

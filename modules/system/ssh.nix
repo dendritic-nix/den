@@ -1,9 +1,11 @@
 {
   den.aspects.system._.ssh = {
-    nixos = {};
+    nixos = { };
     homeManager = {
       programs.ssh = {
+        enableDefaultConfig = false;
         matchBlocks = {
+          "*" = { };
           ghcny = {
             hostname = "github.com";
             user = "git";
