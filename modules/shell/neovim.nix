@@ -1,7 +1,7 @@
 {
   den.aspects.shell._.neovim.homeManager = {pkgs, ...}: {
     programs.neovim = {
-      enable = true;
+      enable = false;
 
       plugins = with pkgs.vimPlugins; [
         (nvim-treesitter.withAllGrammars)
