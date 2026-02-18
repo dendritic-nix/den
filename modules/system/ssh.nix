@@ -1,6 +1,6 @@
 {
   den.aspects.system._.ssh = {
-    nixos = { };
+    nixos = {};
     homeManager = {
       programs.ssh = {
         matchBlocks = {

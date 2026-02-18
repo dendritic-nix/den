@@ -1,43 +1,38 @@
 {
-  den.aspects.system._.virt.nixos =
-    {
-      pkgs,
-      ...
-    }:
-    {
-      users.users.chianyung.extraGroups = [
-        "libvirtd"
-        "kvm"
-      ];
+  den.aspects.system._.virt.nixos = {pkgs, ...}: {
+    users.users.chianyung.extraGroups = [
+      "libvirtd"
+      "kvm"
+    ];
 
-      boot.kernelModules = [ "kvm-intel" ];
+    boot.kernelModules = ["kvm-intel"];
 
-      environment.systemPackages = with pkgs; [
-        qemu_kvm
-        quickemu
-        quickgui
-        virt-manager
-        virt-viewer
-        spice
-        spice-gtk
-        spice-protocol
-        win-virtio
-        win-spice
-      ];
+    environment.systemPackages = with pkgs; [
+      qemu_kvm
+      quickemu
+      quickgui
+      virt-manager
+      virt-viewer
+      spice
+      spice-gtk
+      spice-protocol
+      win-virtio
+      win-spice
+    ];
 
-      virtualisation = {
-        libvirtd = {
-          enable = true;
-          qemu = {
-            package = pkgs.qemu_kvm;
-            runAsRoot = true;
-            swtpm.enable = true;
-            ovmf.enable = true;
-            ovmf.packages = [ pkgs.OVMFFull.fd ];
-          };
+    virtualisation = {
+      libvirtd = {
+        enable = true;
+        qemu = {
+          package = pkgs.qemu_kvm;
+          runAsRoot = true;
+          swtpm.enable = true;
+          ovmf.enable = true;
+          ovmf.packages = [pkgs.OVMFFull.fd];
         };
-        spiceUSBRedirection.enable = true;
       };
-      services.spice-vdagentd.enable = true;
+      spiceUSBRedirection.enable = true;
     };
+    services.spice-vdagentd.enable = true;
+  };
 }

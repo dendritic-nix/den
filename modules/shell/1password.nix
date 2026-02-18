@@ -6,30 +6,27 @@
         enable = true;
         # Certain features, including CLI integration and system authentication support,
         # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-        polkitPolicyOwners = [ "chianyung" ];
+        polkitPolicyOwners = ["chianyung"];
       };
     };
-    homeManager =
-      {
-        pkgs,
-        lib,
-        ...
-      }:
-      {
-        programs.ssh = {
-          enable = true;
-          extraConfig =
-            if pkgs.stdenv.hostPlatform.isDarwin then
-              ''
-                IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-              ''
-            else if pkgs.stdenv.hostPlatform.isLinux then
-              ''
-                IdentityAgent "~/.1password/agent.sock"
-              ''
-            else
-              "";
-        };
+    homeManager = {
+      pkgs,
+      lib,
+      ...
+    }: {
+      programs.ssh = {
+        enable = true;
+        extraConfig =
+          if pkgs.stdenv.hostPlatform.isDarwin
+          then ''
+            IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+          ''
+          else if pkgs.stdenv.hostPlatform.isLinux
+          then ''
+            IdentityAgent "~/.1password/agent.sock"
+          ''
+          else "";
       };
+    };
   };
 }

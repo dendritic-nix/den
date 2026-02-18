@@ -3,6 +3,5 @@
   __findFile,
   inputs,
   ...
-}:
-{
+}: {
 }
