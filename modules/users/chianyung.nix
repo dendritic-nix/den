@@ -8,7 +8,6 @@
       <shell/packages>
       <shell/nh>
       <shell/env>
-      <shell/xdg>
 
       <shell/_1password>
       <shell/bash>
