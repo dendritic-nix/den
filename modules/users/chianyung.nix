@@ -3,6 +3,9 @@
 
   den.aspects.chianyung = {
     includes = [
+      # Automatically set default shell
+      (<den/user-shell> "fish")
+
       <shell/nix-tools>
       <shell/utils>
       <shell/packages>
@@ -29,14 +32,11 @@
       ...
     }: {
       users.users.chianyung = {
-        # isNormalUser = true;  # already set automatically by den/define-user
         extraGroups = [
-          # "wheel" # already set automatically by den/primary-user
           "uinput"
         ];
-        hashedPassword = "$6$PtkXxfcmi3/Rb9yo$gm83y9wybcTDqXCKGbji0irKhNLfjCx9NiMtqA7p2734eSUVcPrK3lbv4tlGRAc7n8XPyW9jcl9fmOZpQc0Mt0";
-        shell = lib.getExe pkgs.fish;
 
+        hashedPassword = "$6$PtkXxfcmi3/Rb9yo$gm83y9wybcTDqXCKGbji0irKhNLfjCx9NiMtqA7p2734eSUVcPrK3lbv4tlGRAc7n8XPyW9jcl9fmOZpQc0Mt0";
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAr35LjSF5Av8xcsrswXznvBwt4CNDhtD97IqZp0H4/n"
         ];
