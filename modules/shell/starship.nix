@@ -14,19 +14,19 @@
         "$schema" = "https://starship.rs/config-schema.json";
         add_newline = true;
 
-        format = ''
-          $hostname\
-          $directory\
-          $git_branch\
-          $git_state\
-          $git_status\
-          $git_metrics\
-          $nodejs\
-          $bun\
-          $fill\
-          $cmd_duration $jobs $time\
-          $line_break\
-          $character'';
+        # format = ''
+        #   $hostname\
+        #   $directory\
+        #   $git_branch\
+        #   $git_state\
+        #   $git_status\
+        #   $git_metrics\
+        #   $nodejs\
+        #   $bun\
+        #   $fill\
+        #   $cmd_duration $jobs $time\
+        #   $line_break\
+        #   $character'';
 
         character = {
           error_symbol = "[➜](bold red)";

@@ -1,5 +1,5 @@
 rebuild host:
-    nh os switch .#{{ host }}
+    nh os switch . -H {{ host }}
 
 up:
     nix flake update
