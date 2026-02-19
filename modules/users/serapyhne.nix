@@ -1,6 +1,6 @@
 { __findFile, constants, ... }:
 {
-  den.homes.x86_64-linux.seraphyne = { };
+  den.homes.x86_64-linux.${constants.user_seraphyne} = { };
 
   den.aspects.seraphyne = {
     includes = [
