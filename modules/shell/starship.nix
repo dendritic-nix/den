@@ -1,5 +1,12 @@
 {
   den.aspects.shell._.starship.homeManager = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: let
+    tomlFormat = pkgs.formats.toml {};
+  in {
     programs.starship = {
       enable = true;
       enableFishIntegration = true;
@@ -19,8 +26,7 @@
           $fill\
           $cmd_duration $jobs $time\
           $line_break\
-          $character
-        '';
+          $character'';
 
         character = {
           error_symbol = "[➜](bold red)";
@@ -165,5 +171,42 @@
         zig.symbol = " ";
       };
     };
+
+    home.file.${config.programs.starship.configPath}.source = lib.mkForce (
+      pkgs.runCommand "starship-config.toml" {
+        baseConfig = tomlFormat.generate "starship-config-base.toml" config.programs.starship.settings;
+      } ''
+        awk '
+          BEGIN {
+            in_root = 1
+            replaced = 0
+          }
+
+          /^\[/ {
+            in_root = 0
+          }
+
+          in_root && !replaced && /^format = / {
+            print "format = \"\"\""
+            print "$hostname\\\\"
+            print "$directory\\\\"
+            print "$git_branch\\\\"
+            print "$git_state\\\\"
+            print "$git_status\\\\"
+            print "$git_metrics\\\\"
+            print "$nodejs\\\\"
+            print "$bun\\\\"
+            print "$fill\\\\"
+            print "$cmd_duration $jobs $time\\\\"
+            print "$line_break\\\\"
+            print "$character\"\"\""
+            replaced = 1
+            next
+          }
+
+          { print }
+        ' "$baseConfig" > "$out"
+      ''
+    );
   };
 }
