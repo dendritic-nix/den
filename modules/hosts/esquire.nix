@@ -1,5 +1,11 @@
-{__findFile, ...}: {
-  den.hosts.x86_64-linux.esquire.users.chianyung = {};
+{
+  __findFile,
+  constants,
+  ...
+}: {
+  den.hosts.x86_64-linux.esquire.users = {
+    ${constants.user_chianyung} = {};
+  };
 
   den.aspects.esquire = {
     nixos = {lib, ...}: {

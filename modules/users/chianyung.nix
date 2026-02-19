@@ -1,5 +1,9 @@
-{__findFile, ...}: {
-  den.homes.x86_64-linux.chianyung = {};
+{
+  __findFile,
+  constants,
+  ...
+}: {
+  den.homes.x86_64-linux.${constants.user_chianyung} = {};
 
   den.aspects.chianyung = {
     includes = [
@@ -31,7 +35,7 @@
       lib,
       ...
     }: {
-      users.users.chianyung = {
+      users.users.${constants.user_chianyung} = {
         extraGroups = [
           "uinput"
         ];

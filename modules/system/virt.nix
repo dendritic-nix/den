@@ -1,6 +1,6 @@
-{
+{constants, ...}: {
   den.aspects.system._.virt.nixos = {pkgs, ...}: {
-    users.users.chianyung.extraGroups = [
+    users.users.${constants.user_chianyung}.extraGroups = [
       "libvirtd"
       "kvm"
     ];
