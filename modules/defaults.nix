@@ -6,7 +6,6 @@
 }: {
   den.default = {
     nixos.system.stateVersion = "25.11";
-    homeManager.home.stateVersion = "25.11";
     darwin.system.stateVersion = "6";
 
     nixos = {
@@ -51,9 +50,13 @@
       };
     };
 
-    homeManager = {
+    homeManager = {config, ...}: {
+      home.stateVersion = "25.11";
       imports = [inputs.nix-index-database.homeModules.nix-index];
       systemd.user.startServices = "sd-switch";
+
+      # Keep pre-26.05 behavior and silence the Home Manager transition warning.
+      programs.zsh.dotDir = config.home.homeDirectory;
     };
   };
 
