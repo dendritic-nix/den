@@ -29,9 +29,9 @@
       ...
     }: {
       users.users.chianyung = {
-        isNormalUser = true;
+        # isNormalUser = true;  # already set automatically by den/define-user
         extraGroups = [
-          "wheel"
+          # "wheel" # already set automatically by den/primary-user
           "uinput"
         ];
         hashedPassword = "$6$PtkXxfcmi3/Rb9yo$gm83y9wybcTDqXCKGbji0irKhNLfjCx9NiMtqA7p2734eSUVcPrK3lbv4tlGRAc7n8XPyW9jcl9fmOZpQc0Mt0";

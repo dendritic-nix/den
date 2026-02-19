@@ -3,8 +3,7 @@
   __findFile,
   inputs,
   ...
-}:
-{
+}: {
   den.default = {
     nixos.system.stateVersion = "25.11";
     homeManager.home.stateVersion = "25.11";
@@ -29,7 +28,7 @@
       nix = {
         settings = {
           warn-dirty = false;
-          extra-system-features = [ "recursive-nix" ];
+          extra-system-features = ["recursive-nix"];
           experimental-features = [
             "nix-command"
             "flakes"
@@ -53,7 +52,7 @@
     };
 
     homeManager = {
-      imports = [ inputs.nix-index-database.homeModules.nix-index ];
+      imports = [inputs.nix-index-database.homeModules.nix-index];
       systemd.user.startServices = "sd-switch";
     };
   };
@@ -61,6 +60,8 @@
   den.default.includes = [
     # Enable home-manager on all hosts.
     <den/home-manager>
+
+    <den/define-user>
 
     # Automatically create the user on host.
     <den/primary-user>
