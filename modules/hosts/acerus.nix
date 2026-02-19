@@ -6,6 +6,7 @@
 {
   den.hosts.x86_64-linux.acerus.users = {
     ${constants.user_chianyung} = { };
+    ${constants.user_serapyhne} = { };
   };
 
   den.aspects.acerus = {
