@@ -8,10 +8,10 @@
           "*" = {
             serverAliveInterval = 30;
             serverAliveCountMax = 120;
-            strictHostKeyChecking = "accept-new";
             identitiesOnly = true;
             extraOptions = {
               Protocol = "2";
+              StrictHostKeyChecking = "accept-new";
             };
           };
           ghcny = {
