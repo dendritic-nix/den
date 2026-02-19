@@ -43,6 +43,9 @@
 
       <apps/ghostty>
       # <apps/zen>
+
+      <services/tailscale>
+      <services/kanata>
     ];
   };
 }

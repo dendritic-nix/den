@@ -25,9 +25,6 @@
       <shell/starship>
       <shell/tmux>
       <shell/yazi>
-
-      <services/tailscale>
-      <services/kanata>
     ];
 
     nixos = {
