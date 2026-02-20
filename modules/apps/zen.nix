@@ -23,7 +23,7 @@
       programs.zen-browser.profiles.default = rec {
         search = {
           force = true; # Needed for nix to overwrite search settings on rebuild
-          default = "ddg"; # Aliased to duckduckgo, see other aliases in the link above
+          default = "google"; # Aliased to duckduckgo, see other aliases in the link above
           engines = {
             # My NixOS Option and package search shortcut
             mynixos = {
@@ -86,13 +86,13 @@
             id = "2d5fb7f4-d5e7-4903-b8ec-35dbd938a540";
             icon = "💻";
             container = containers.Code.id;
-            position = 3000;
+            position = 4000;
           };
           Personal = {
             id = "a46d490f-9de8-434f-94dd-b8fc2d8f2dc1";
             icon = "👥";
             container = containers.Personal.id;
-            position = 4000;
+            position = 8000;
           };
         };
         keyboardShortcuts = [
