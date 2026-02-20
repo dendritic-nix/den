@@ -6,7 +6,11 @@
 }: {
   den.default = {
     nixos.system.stateVersion = "25.11";
-    darwin.system.stateVersion = "6";
+    darwin.system.stateVersion = 6;
+    darwin.nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     nixos = {
       imports = [
