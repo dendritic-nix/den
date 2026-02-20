@@ -13,8 +13,8 @@
     homeManager = {
       programs.niri.settings = {
         binds = {
-          "Mod+Z".action.spawn = "zen";
-          "Mod+G".action.spawn = "ghostty";
+          "Mod+Z".action.spawn = ["zen"];
+          "Mod+G".action.spawn = ["ghostty"];
         };
       };
     };
