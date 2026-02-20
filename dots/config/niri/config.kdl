@@ -51,13 +51,12 @@ input {
   // focus-follows-mouse max-scroll-amount="0%"
 }
 
-// Outputs (monitor). Uncomment by removing "/-" and edit name/mode if needed.
-/-output "eDP-1" {
-  // off
-  mode "1920x1080@120.030"
-  scale 2
+// Outputs (monitor). For 27" 4K DisplayPort.
+output "DP-1" {
+  mode "3840x2160@60.000"
+  // mode "3840x2160@120.000"
+  scale 1.5
   transform "normal"
-  position x=1280 y=0
 }
 
 layout {
@@ -132,7 +131,7 @@ window-rule {
 
 window-rule {
   match app-id=r#"firefox$"#
-  title="^Picture-in-Picture$"
+  match title="^Picture-in-Picture$"
   open-floating true
 }
 
