@@ -5,10 +5,10 @@
       plugins = with pkgs.vimPlugins; [
         (nvim-treesitter.withAllGrammars)
       ];
-      xdg.configFile."nvim" = {
-        source = "../../dots/nvim";
-        recursive = true;
-      };
+    };
+    xdg.configFile."nvim" = {
+      source = "../../dots/nvim";
+      recursive = true;
     };
   };
 }
