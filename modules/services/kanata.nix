@@ -2,6 +2,8 @@
   den.aspects.services._.kanata = {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [kanata-with-cmd];
+      environment.etc."kanata/row.kbd".source = ../../dots/config/kanata/row.kbd;
+
       systemd.services.kanata = {
         description = "Kanata Keyboard Remapper";
         wantedBy = ["multi-user.target"];
@@ -9,15 +11,13 @@
 
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${pkgs.kanata}/bin/kanata -c /home/chianyung/.config/kanata/row.kbd";
+          ExecStart = "${pkgs.kanata-with-cmd}/bin/kanata -c /etc/kanata/row.kbd";
           Restart = "always";
         };
       };
     };
     darwin = {};
-    homeManager = {
-      xdg.configFile."kanata/row.kbd".source = ../../dots/config/kanata/row.kbd;
-    };
+    homeManager = {};
     includes = [];
   };
 }
