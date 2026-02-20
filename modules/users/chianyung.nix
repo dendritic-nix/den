@@ -7,7 +7,7 @@
 
   den.aspects.${constants.user_one} = {
     includes = [
-      <shell/yazi>
+      # <shell/yazi>
     ];
 
     nixos = {
