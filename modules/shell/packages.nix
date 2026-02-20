@@ -93,7 +93,7 @@
       nixfmt # Nix formatter (RFC style)
 
       # Editors
-      neovim
+      # neovim
 
       # Android Development
       # scrcpy # Android device mirroring
