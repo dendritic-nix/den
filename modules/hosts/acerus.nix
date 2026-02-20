@@ -43,7 +43,8 @@
       <desktop/gnome>
 
       <apps/ghostty>
-      # <apps/zen>
+      <apps/zen>
+      <apps/firefox>
 
       <services/tailscale>
       <services/kanata>
