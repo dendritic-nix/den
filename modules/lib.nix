@@ -23,6 +23,11 @@ in {
           }:
             take.unused OS {
               nixos.networking.hostName = host.hostName;
+              darwin.networking = {
+                hostName = host.hostName;
+                localHostName = host.hostName;
+                computerName = host.hostName;
+              };
             }
         )
       ];

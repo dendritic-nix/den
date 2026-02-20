@@ -5,7 +5,7 @@
     darwin = {
       system.defaults = {
         dock = {
-          autohide = false;
+          autohide = true;
           orientation = "bottom";
         };
 
