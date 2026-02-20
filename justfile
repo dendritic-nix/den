@@ -1,5 +1,5 @@
 rebuild host:
-    nh os switch . -H {{ host }}
+    if [ "$(uname -s)" = "Darwin" ]; then nh darwin switch . -H {{ host }}; else nh os switch . -H {{ host }}; fi
 
 up:
     nix flake update
