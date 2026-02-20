@@ -101,7 +101,8 @@
             id = "zen-compact-mode-toggle";
             key = "s";
             modifiers = {
-              alt = true;
+              alt = pkgs.lib.mkIf pkgs.stdenv.isDarwin true;
+              control = pkgs.lib.mkIf pkgs.stdenv.isLinux true;
             };
           }
           {
