@@ -14,7 +14,17 @@
         inputs.disko.nixosModules.disko
       ];
 
-      nixpkgs.config.allowUnfree = true;
+      nixpkgs = {
+        config.allowUnfree = true;
+        overlays = [
+          (_final: prev: {
+            unstable = import inputs.nixpkgs-unstable {
+              system = prev.system;
+              config.allowUnfree = true;
+            };
+          })
+        ];
+      };
       programs.nix-index-database.comma.enable = true;
       programs.nix-ld.enable = true;
 
