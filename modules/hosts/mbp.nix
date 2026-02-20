@@ -1,5 +1,5 @@
 {constants, ...}: {
-  den.hosts.aarch64-darwin.mbp.users.${constants.user_chianyung} = {};
+  den.hosts.aarch64-darwin.mbp.users.micha = {};
 
   den.aspects.mbp = {
     darwin = {
@@ -11,6 +11,9 @@
 
         NSGlobalDomain._HIHideMenuBar = true;
       };
+      includes = [
+        <apps/zen>
+      ];
     };
   };
 }
