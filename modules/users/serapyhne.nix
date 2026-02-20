@@ -3,12 +3,12 @@
   constants,
   ...
 }: {
-  den.homes.x86_64-linux.${constants.user_seraphyne} = {};
+  den.homes.x86_64-linux.${constants.user_two} = {};
 
-  den.aspects.seraphyne = {
+  den.aspects.${constants.user_two} = {
     includes = [
       # Automatically set default shell
-      (<den/user-shell> "zsh")
+      (<den/user-shell> "fish")
 
       <shell/nix-tools>
       <shell/utils>
@@ -24,6 +24,7 @@
       <shell/neovim>
       <shell/starship>
       <shell/tmux>
+      <shell/yazi>
     ];
 
     nixos = {
@@ -31,7 +32,7 @@
       lib,
       ...
     }: {
-      users.users.${constants.user_seraphyne} = {
+      users.users.${constants.user_two} = {
         extraGroups = [
           "uinput"
         ];

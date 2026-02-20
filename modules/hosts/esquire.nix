@@ -4,7 +4,7 @@
   ...
 }: {
   den.hosts.x86_64-linux.esquire.users = {
-    ${constants.user_chianyung} = {};
+    ${constants.user_two} = {};
   };
 
   den.aspects.esquire = {

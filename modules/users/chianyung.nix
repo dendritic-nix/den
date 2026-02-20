@@ -3,27 +3,10 @@
   constants,
   ...
 }: {
-  # den.homes.x86_64-linux.${constants.user_chianyung} = {};
+  den.homes.x86_64-linux.${constants.user_one} = {};
 
-  den.aspects.chianyung = {
+  den.aspects.${constants.user_one} = {
     includes = [
-      # Automatically set default shell
-      (<den/user-shell> "fish")
-
-      <shell/nix-tools>
-      <shell/utils>
-      <shell/packages>
-      <shell/nh>
-      <shell/env>
-
-      <shell/_1password>
-      <shell/bash>
-      <shell/fish>
-      <shell/git/chianyungcode>
-      <shell/lazygit>
-      <shell/neovim>
-      <shell/starship>
-      <shell/tmux>
       <shell/yazi>
     ];
 
@@ -32,7 +15,7 @@
       lib,
       ...
     }: {
-      users.users.${constants.user_chianyung} = {
+      users.users.${constants.user_one} = {
         extraGroups = [
           "uinput"
         ];

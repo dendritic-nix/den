@@ -1,6 +1,7 @@
 {
   _module.args.constants = {
-    user_chianyung = "chianyung";
-    user_seraphyne = "seraphyne";
+    user_one = "chianyung";
+    user_two = "seraphyne";
+    user_three = "micha";
   };
 }
