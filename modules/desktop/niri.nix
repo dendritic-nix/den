@@ -9,5 +9,9 @@
       programs.niri.enable = true;
       security.polkit.enable = true;
     };
+
+    homeManager = {
+      xdg.configFile."niri/config.kdl".source = ../../dots/config/niri/config.kdl;
+    };
   };
 }
