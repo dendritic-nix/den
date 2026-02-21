@@ -1,0 +1,190 @@
+// This config is in the KDL format: https://kdl.dev
+// "/-" comments out the following node.
+// Wiki: https://niri-wm.github.io/niri/Configuration:-Introduction
+
+input {
+  keyboard {
+    xkb {
+      // layout "us,ru"
+      // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+      // If empty, niri fetches xkb settings from org.freedesktop.locale1
+      // (controlled via: localectl set-x11-keymap)
+    }
+    // Enable numlock on startup; omit to disable.
+    numlock
+  }
+
+  touchpad {
+    // off
+    tap
+    // dwt
+    // dwtp
+    // drag false
+    // drag-lock
+    natural-scroll
+    // accel-speed 0.2
+    // accel-profile "flat"
+    // scroll-method "two-finger"
+    // disabled-on-external-mouse
+  }
+
+  mouse {
+    // off
+    // natural-scroll
+    // accel-speed 0.2
+    // accel-profile "flat"
+    // scroll-method "no-scroll"
+  }
+
+  trackpoint {
+    // off
+    // natural-scroll
+    // accel-speed 0.2
+    // accel-profile "flat"
+    // scroll-method "on-button-down"
+    // scroll-button 273
+    // scroll-button-lock
+    // middle-emulation
+  }
+
+  // warp-mouse-to-focus
+  // focus-follows-mouse max-scroll-amount="0%"
+}
+
+// Outputs (monitor). For 27" 4K DisplayPort.
+output "DP-1" {
+  mode "3840x2160@60.000"
+  // mode "3840x2160@120.000"
+  scale 1.5
+  transform "normal"
+}
+
+layout {
+  gaps 16
+  center-focused-column "never"
+
+  preset-column-widths {
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    // fixed 1920
+  }
+
+  default-column-width { proportion 0.5; }
+
+  focus-ring {
+    // off
+    width 4
+    active-color "#7fc8ff"
+    inactive-color "#505050"
+    // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
+    // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+  }
+
+  border {
+    off
+    width 4
+    active-color "#ffc87f"
+    inactive-color "#505050"
+    urgent-color "#9b0000"
+  }
+
+  shadow {
+    // on
+    softness 30
+    spread 5
+    offset x=0 y=5
+    color "#0007"
+  }
+
+  struts {
+    // left 64
+    // right 64
+    // top 64
+    // bottom 64
+  }
+}
+
+// Autostart
+spawn-at-startup "waybar"
+// spawn-sh-at-startup "..."
+
+hotkey-overlay {
+  // skip-at-startup
+}
+
+// prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+// screenshot-path null
+
+animations {
+  // off
+  // slowdown 3.0
+}
+
+// Window rules
+window-rule {
+  match app-id=r#"^org\.wezfurlong\.wezterm$"#
+  default-column-width {}
+}
+
+window-rule {
+  match app-id=r#"firefox$"#
+  match title="^Picture-in-Picture$"
+  open-floating true
+}
+
+/-window-rule {
+  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+  match app-id=r#"^org\.gnome\.World\.Secrets$"#
+  block-out-from "screen-capture"
+  // block-out-from "screencast"
+}
+
+/-window-rule {
+  geometry-corner-radius 12
+  clip-to-geometry true
+}
+
+binds {
+  Mod+Shift+Slash { show-hotkey-overlay; }
+
+  // Suggested binds (default)
+  Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+  Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+  Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+
+  Super+Alt+S allow-when-locked=true hotkey-overlay-title=null {
+    spawn-sh "pkill orca || exec orca";
+  }
+
+  XF86AudioRaiseVolume allow-when-locked=true {
+    spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
+  }
+  XF86AudioLowerVolume allow-when-locked=true {
+    spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+  }
+  XF86AudioMute allow-when-locked=true {
+    spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+  }
+  XF86AudioMicMute allow-when-locked=true {
+    spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+  }
+
+  XF86AudioPlay allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+  XF86AudioStop allow-when-locked=true { spawn-sh "playerctl stop"; }
+  XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
+  XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
+
+  XF86MonBrightnessUp allow-when-locked=true {
+    spawn "brightnessctl" "--class=backlight" "set" "+10%";
+  }
+  XF86MonBrightnessDown allow-when-locked=true {
+    spawn "brightnessctl" "--class=backlight" "set" "10%-";
+  }
+
+  // ===== Tambahan kamu =====
+  Super+G hotkey-overlay-title="Open Ghostty" { spawn "ghostty"; }
+  Super+Z hotkey-overlay-title="Open Zen Browser" { spawn "zen-beta"; }
+}
