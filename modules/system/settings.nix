@@ -1,8 +1,8 @@
 {__findFile, ...}: {
   den.aspects.system._.settings = {
     darwin = {
-      spaces.spans-displays = false;
       system.defaults = {
+        spaces.spans-displays = false;
         menuExtraClock = {
           Show24Hour = true;
           IsAnalog = false;
