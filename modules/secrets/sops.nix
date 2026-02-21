@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  den.aspects.security._.sops = {
+  den.aspects.secrets._.sops = {
     darwin = {pkgs, ...}: {
       imports = [inputs.sops-nix.darwinModules.sops];
 

@@ -8,7 +8,7 @@
   den.aspects.mbp = {
     includes = [
       <system/settings>
-      <security/sops>
+      <secrets/sops>
     ];
 
     # homeManager = {
