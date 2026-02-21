@@ -14,16 +14,9 @@
       pkgs,
       config,
       ...
-    }: let
-      # wrapper kecil: tidak install Zen, hanya menyediakan binary untuk memenuhi opsi `package`
-      zenBrew = pkgs.writeShellApplication {
-        name = "zen";
-        text = ''
-          exec /usr/bin/open -a "Zen" --args "$@"
-        '';
-      };
-    in {
+    }: {
       home.sessionVariables = {MOZ_LEGACY_PROFILES = "1";};
+
       home.file = pkgs.lib.mkIf (pkgs.stdenv.isDarwin && builtins.pathExists ./Profile) {
         "Library/Application Support/Zen/Profiles/default" = {
           force = true;
@@ -47,7 +40,6 @@
 
       imports = [inputs.zen-browser.homeModules.default];
       programs.zen-browser.enable = false;
-      programs.zen-browser.package = zenBrew;
       programs.zen-browser.suppressXdgMigrationWarning = true;
       programs.zen-browser.darwinDefaultsId = pkgs.lib.mkIf pkgs.stdenv.isDarwin "org.mozilla.firefox.plist";
       home.sessionVariables.BROWSER = "zen";
