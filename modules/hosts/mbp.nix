@@ -2,7 +2,9 @@
   __findFile,
   constants,
   ...
-}: {
+}: let
+  zenProfilePath = ../../dots/config/zen/Profiles/default;
+in {
   den.hosts.aarch64-darwin.mbp.users.${constants.user_one} = {};
 
   den.aspects.mbp = {
@@ -10,22 +12,22 @@
     ];
 
     homeManager = {
-      home.file."Library/Application Support/Zen/Profiles/default" = {
+      home.file."Library/Application Support/zen" = {
         force = true;
         recursive = true;
-        source = ../../dots/config/zen/Profiles/default;
+        source = ../../dots/config/zen;
       };
 
-      home.file."Library/Application Support/Zen/profiles.ini".text = ''
-        [General]
-        StartWithLastProfile=1
-
-        [Profile0]
-        Default=1
-        IsRelative=1
-        Name=default
-        Path=Profiles/default
-      '';
+      # home.file."Library/Application Support/Zen/profiles.ini".text = ''
+      #   [General]
+      #   StartWithLastProfile=1
+      #
+      #   [Profile0]
+      #   Default=1
+      #   IsRelative=1
+      #   Name=default
+      #   Path=Profiles/default
+      # '';
     };
 
     darwin = {
