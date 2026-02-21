@@ -1,0 +1,7 @@
+keys:
+  - &cny age1lemhxccxe6z4fhp0y8l2yvlk0p3r764tydrq357hv6270w7e550sp27jc4
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *cny
