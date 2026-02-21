@@ -7,6 +7,7 @@
 
   den.aspects.mbp = {
     includes = [
+      <system/settings>
     ];
 
     # homeManager = {
@@ -28,15 +29,6 @@
     #   # '';
     # };
 
-    darwin = {
-      system.defaults = {
-        dock = {
-          autohide = true;
-          orientation = "bottom";
-        };
-
-        NSGlobalDomain._HIHideMenuBar = true;
-      };
-    };
+    darwin = {};
   };
 }
