@@ -1,5 +1,15 @@
 {inputs, ...}: {
   den.aspects.apps._.zen = {
+    darwin = {
+      environment.etc = {
+        "1password/custom_allowed_browsers" = {
+          text = ''
+            zen
+          ''; # or just "zen" if you use unwrapped package
+          mode = "0755";
+        };
+      };
+    };
     nixos = {
       environment.etc = {
         "1password/custom_allowed_browsers" = {
@@ -75,24 +85,96 @@
             icon = "🚀";
             container = containers.Business.id;
             position = 1000;
+            theme = {
+              type = "gradient";
+              colors = [
+                {
+                  algorithm = "floating";
+                  type = "explicit-lightness";
+                  red = 107;
+                  green = 126;
+                  blue = 148;
+                  lightness = 50;
+                  position = {
+                    x = 51;
+                    y = 97;
+                  };
+                }
+              ];
+              opacity = 0.5;
+            };
           };
           Productivity = {
             id = "4978fdb5-eadf-4ab6-9281-d62f2d2e1eb8";
             icon = "🍃";
             container = containers.Productivity.id;
             position = 2000;
+            theme = {
+              type = "gradient";
+              colors = [
+                {
+                  algorithm = "floating";
+                  type = "explicit-lightness";
+                  red = 188;
+                  green = 217;
+                  blue = 162;
+                  lightness = 50;
+                  position = {
+                    x = 51;
+                    y = 97;
+                  };
+                }
+              ];
+              opacity = 0.5;
+            };
           };
           Code = {
             id = "2d5fb7f4-d5e7-4903-b8ec-35dbd938a540";
             icon = "💻";
             container = containers.Code.id;
             position = 4000;
+            theme = {
+              type = "gradient";
+              colors = [
+                {
+                  algorithm = "floating";
+                  type = "explicit-lightness";
+                  red = 38;
+                  green = 38;
+                  blue = 38;
+                  lightness = 50;
+                  position = {
+                    x = 51;
+                    y = 97;
+                  };
+                }
+              ];
+              opacity = 0.5;
+            };
           };
           Personal = {
             id = "a46d490f-9de8-434f-94dd-b8fc2d8f2dc1";
             icon = "👥";
             container = containers.Personal.id;
             position = 8000;
+            theme = {
+              type = "gradient";
+              colors = [
+                {
+                  algorithm = "floating";
+                  type = "explicit-lightness";
+                  red = 211;
+                  green = 78;
+                  blue = 78;
+                  lightness = 50;
+                  position = {
+                    x = 51;
+                    y = 97;
+                  };
+                }
+              ];
+              opacity = 0.5;
+            };
           };
         };
         keyboardShortcuts = [
