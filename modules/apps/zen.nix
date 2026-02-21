@@ -18,7 +18,7 @@
       imports = [inputs.zen-browser.homeModules.default];
       home.sessionVariables.BROWSER = "zen";
       programs.zen-browser = {
-        enable = false;
+        enable = true;
         suppressXdgMigrationWarning = true;
         darwinDefaultsId = pkgs.lib.mkIf pkgs.stdenv.isDarwin "org.mozilla.firefox.plist";
         profiles.default = rec {
