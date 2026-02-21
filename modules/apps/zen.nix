@@ -1,15 +1,5 @@
 {inputs, ...}: {
   den.aspects.apps._.zen = {
-    darwin = {
-      environment.etc = {
-        "1password/custom_allowed_browsers" = {
-          text = ''
-            zen
-          ''; # or just "zen" if you use unwrapped package
-          mode = "0755";
-        };
-      };
-    };
     nixos = {
       environment.etc = {
         "1password/custom_allowed_browsers" = {
@@ -26,7 +16,7 @@
       ...
     }: {
       imports = [inputs.zen-browser.homeModules.default];
-      programs.zen-browser.enable = true;
+      programs.zen-browser.enable = false;
       programs.zen-browser.suppressXdgMigrationWarning = true;
       programs.zen-browser.darwinDefaultsId = pkgs.lib.mkIf pkgs.stdenv.isDarwin "org.mozilla.firefox.plist";
       home.sessionVariables.BROWSER = "zen";
@@ -182,10 +172,13 @@
           {
             id = "zen-compact-mode-toggle";
             key = "s";
-            modifiers = {
-              alt = pkgs.lib.mkIf pkgs.stdenv.isDarwin true;
-              control = pkgs.lib.mkIf pkgs.stdenv.isLinux true;
-            };
+            modifiers =
+              (pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
+                alt = true;
+              })
+              // (pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+                control = true;
+              });
           }
           {
             id = "zen-new-empty-split-view";
