@@ -15,6 +15,28 @@
       config,
       ...
     }: {
+      home.sessionVariables = {MOZ_LEGACY_PROFILES = "1";};
+      home.file = pkgs.lib.mkIf (pkgs.stdenv.isDarwin && builtins.pathExists ./Profile) {
+        "Library/Application Support/Zen/Profiles/default" = {
+          force = true;
+          recursive = true;
+          source = ./Profile;
+        };
+
+        "Library/Application Support/Zen/profiles.ini" = {
+          text = ''
+            [General]
+            StartWithLastProfile=1
+
+            [Profile0]
+            Default=1
+            IsRelative=1
+            Name=default
+            Path=Profiles/default
+          '';
+        };
+      };
+
       imports = [inputs.zen-browser.homeModules.default];
       programs.zen-browser.enable = false;
       programs.zen-browser.suppressXdgMigrationWarning = true;
