@@ -18,7 +18,7 @@
       services.pcscd.enable = true;
 
       # Point ke identity file YubiKey (system-wide, sama di macOS & NixOS)
-      sops.age.keyFile = "/etc/sops/age/yubikey-identity.txt";
+      # sops.age.keyFile = "/etc/sops/age/yubikey-identity.txt";
 
       # (Opsional tapi umum) default file sops untuk host ini
       # Bisa kamu override per-secret juga.
@@ -38,7 +38,7 @@
       ];
 
       # Point ke identity file YubiKey (system-wide, sama di macOS & NixOS)
-      sops.age.keyFile = "/etc/sops/age/yubikey-identity.txt";
+      # sops.age.keyFile = "/etc/sops/age/yubikey-identity.txt";
 
       # (Opsional tapi umum) default file sops untuk host ini
       # Bisa kamu override per-secret juga.
